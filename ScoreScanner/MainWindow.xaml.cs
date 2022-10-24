@@ -23,14 +23,6 @@ namespace ScoreScanner
             AppConsole.Text += "Loading...\n";
         }
 
-        // 2305    442   220    240
-        //C:\Users\Stian\.runelite\screenshots\Baktus Bror\Boss Kills
-
-        //TODO: Hvis den ikke finner size så er det en solo
-        //TODO: Hør med christian ang. filnavn
-        //TODO: Async ChangeCellValue?
-
-
         private void Init()
         {
             AppConsole.Text += "Initializing Score Scanner...\nReading settings...\n";
@@ -42,8 +34,6 @@ namespace ScoreScanner
             RectHeightInput.Text = settings.RectHeight == 0 ? null : settings.RectHeight.ToString();
             RectWidthInput.Text = settings.RectWidth == 0 ? null : settings.RectWidth.ToString();
             AppConsole.Text += "Finished reading settings.\n";
-
-
         }
 
         private void Start(object sender, RoutedEventArgs e)
