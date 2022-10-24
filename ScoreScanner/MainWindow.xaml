@@ -1,0 +1,535 @@
+﻿<Window x:Class="ScoreScanner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        mc:Ignorable="d"
+        Title="Score Scanner" 
+        Height="500" Width="900"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#2b1e13">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--#region Tab bar-->
+        <Grid Background="#9A6C44"
+              Grid.ColumnSpan="2"
+              MouseDown="GridMouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="CoX Score"
+                       Foreground="White"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontWeight="Medium"/>
+
+            <Button Content="Exit"
+                        Foreground="White"
+                        FontSize="10"
+                        FontWeight="Medium"
+                        Margin="0,0,10,0"
+                        Grid.Column="12"
+                        Grid.ColumnSpan="2"
+                        Click="ExitApplication">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                        <Setter Property="Background" Value="#574b60"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3f334d"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="75" 
+                                Height="15" 
+                                CornerRadius="8"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Left side-->
+        <StackPanel Grid.Row="1"
+                    VerticalAlignment="Top"
+                    Margin="60">
+
+            <StackPanel>
+                <!--#region Header-->
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,20">
+                    <Image Width="100" 
+                           Height="100"
+                           Source="Images/ChambersOfXericLogo.png"
+                           RenderOptions.BitmapScalingMode="Fant"/>
+                    <TextBlock Text="Score Scanner"
+                           Foreground="#B27F50"
+                           FontSize="20"
+                           FontWeight="Medium"
+                           VerticalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                           Margin="10,0,0,0"/>
+                </StackPanel>
+                <!--#endregion-->
+                
+                <!--#region Image Folder Input-->
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <TextBox x:Name="ImageFolderInput"
+                                 Background="#574b60"
+                                 BorderBrush="#9a6c44"
+                                 Width="250"
+                                 FontFamily="Fonts/#Doris"
+                                 Foreground="White"
+                                 HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center"/>
+                        <TextBlock IsHitTestVisible="False" 
+                                   Text="Enter Image Folder Location Here"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,0,0,0"
+                                   Foreground="DarkGray"
+                                   FontFamily="Fonts/#Doris">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=ImageFolderInput}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    
+                    <!--#region Browse Button-->
+                    <Button Content="Browse"
+                        Foreground="White"
+                        FontSize="10"
+                        FontWeight="Medium"
+                        Click="ImageFolderBrowser">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                                <Setter Property="Background" Value="#9a6c44"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#714f32"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="50" 
+                                    Height="30" 
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <!--#endregion-->
+                </StackPanel>
+                <!--#endregion-->
+                
+                <!--#region Excel Sheet Input-->
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,10,0,0">
+                    <Grid>
+                        <TextBox x:Name="ExcelSheetInput"
+                                 Background="#574b60"
+                                 BorderBrush="#9a6c44"
+                                 Width="250"
+                                 FontFamily="Fonts/#Doris"
+                                 Foreground="White"
+                                 HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center"/>
+                        <TextBlock IsHitTestVisible="False" 
+                                   Text="Enter Excel Spreadsheet Location Here"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,0,0,0"
+                                   Foreground="DarkGray"
+                                   FontFamily="Fonts/#Doris">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=ExcelSheetInput}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+                    <!--#region Browse Button-->
+                    <Button Content="Browse"
+                        Foreground="White"
+                        FontSize="10"
+                        FontWeight="Medium"
+                            Click="ExcelSheetFolderBrowser">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                                <Setter Property="Background" Value="#9a6c44"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#714f32"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="50" 
+                                    Height="30" 
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <!--#endregion-->
+                    
+                </StackPanel>
+                <!--#endregion-->
+                
+                <!--#region Image Cropping-->
+                <StackPanel Orientation="Horizontal"
+                            Margin="0, 10, 0, 0">
+
+                    <!--#region Rect X Input-->
+                    <Grid>
+                        <TextBox x:Name="RectXInput"
+                                 Background="#574b60"
+                                 BorderBrush="#9a6c44"
+                                 Width="75"
+                                 Height="30"
+                                 FontFamily="Fonts/#Doris"
+                                 Foreground="White"
+                                 HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center"
+                                 TextChanged="ImageCropChanged"/>
+                        <TextBlock IsHitTestVisible="False" 
+                                   Text="X"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,0,0,0"
+                                   Foreground="DarkGray"
+                                   FontFamily="Fonts/#Doris">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=RectXInput}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <!--#endregion-->
+                    <!--#region Rect Y Input-->
+                    <Grid>
+                        <TextBox x:Name="RectYInput"
+                                 Background="#574b60"
+                                 BorderBrush="#9a6c44"
+                                 Width="75"
+                                 FontFamily="Fonts/#Doris"
+                                 Foreground="White"
+                                 HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center"
+                                 TextChanged="ImageCropChanged"/>
+                        <TextBlock IsHitTestVisible="False" 
+                                   Text="Y"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,0,0,0"
+                                   Foreground="DarkGray"
+                                   FontFamily="Fonts/#Doris">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=RectYInput}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <!--#endregion-->
+                    <!--#region Rect Width Input-->
+                    <Grid>
+                        <TextBox x:Name="RectWidthInput"
+                                 Background="#574b60"
+                                 BorderBrush="#9a6c44"
+                                 Width="75"
+                                 FontFamily="Fonts/#Doris"
+                                 Foreground="White"
+                                 HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center"
+                                 TextChanged="ImageCropChanged"/>
+                        <TextBlock IsHitTestVisible="False" 
+                                   Text="Width"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,0,0,0"
+                                   Foreground="DarkGray"
+                                   FontFamily="Fonts/#Doris">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=RectWidthInput}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <!--#endregion-->
+                    <!--#region Rect Height Input-->
+                    <Grid>
+                        <TextBox x:Name="RectHeightInput"
+                                 Background="#574b60"
+                                 BorderBrush="#9a6c44"
+                                 Width="75"
+                                 FontFamily="Fonts/#Doris"
+                                 Foreground="White"
+                                 HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center"
+                                 TextChanged="ImageCropChanged"/>
+                        <TextBlock IsHitTestVisible="False" 
+                                   Text="Height"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,0,0,0"
+                                   Foreground="DarkGray"
+                                   FontFamily="Fonts/#Doris">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=RectHeightInput}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                    </Grid>
+                    <!--#endregion-->
+                    <!--#region Help/Info-->
+                    <Image Source="Images/HelpIcon.png" Height="25"
+                           Margin="5,0,0,0"
+                           RenderOptions.BitmapScalingMode="Fant"
+                           ToolTipService.InitialShowDelay="500"
+                           ToolTipService.BetweenShowDelay="10000"
+                           ToolTip="X: The x-coordinate of the upper-left corner of the rectangle.&#x0a;Y: The y-coordinate of the upper-left corner of the rectanble.&#x0a;Width: The width of the rectangle.&#x0a;Height: The height of the rectanble.&#x0a;&#x0a;Make sure [Total: xxxxx] and [Party size: x] are both visible"/>
+                    <!--#endregion-->
+                    
+                </StackPanel>
+                <!--#Endregion-->
+                
+            </StackPanel>
+
+            <!--#region Start Button-->
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,15,0,0">
+                <Button Content="Start"
+                        Foreground="White"
+                        FontSize="14"
+                        FontWeight="Medium"
+                        Margin="0,0,10,0"
+                        Click="Start">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                            <Setter Property="Background" Value="#9a6c44"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#714f32"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="100" 
+                                    Height="25" 
+                                    CornerRadius="12"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+            <!--#endregion-->
+            
+            <!--#region Cropped image preview-->
+            <StackPanel Height="115"
+                        Margin="0,15,0,15"
+                        Orientation="Horizontal">
+                <Image x:Name="CropPreview"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"/>
+            </StackPanel>
+            <!--#endregion-->
+            
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Right side-->
+        
+        <!--#region Console-->
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="15,15,15,15"
+                    Height="445">
+            <ScrollViewer x:Name="appConsoleScrollViewer"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Hidden" Height="445">
+                <TextBlock x:Name="AppConsole" 
+                           Opacity="0.5"
+                           VerticalAlignment="Bottom"
+                           TextWrapping="Wrap" 
+                           Background="Transparent" 
+                           Foreground="White" 
+                           FontSize="14" 
+                           TextAlignment="Right"
+                           FontFamily="Fonts/#Consola"/>
+            </ScrollViewer>
+        </StackPanel>
+        <!--#endregion-->
+        
+        <!--#region Lines -->
+        <Grid Grid.Column="1"
+              Grid.RowSpan="2"
+              Margin="160, -365, -610, 85"
+              Panel.ZIndex="-1">
+            <Grid.RenderTransform>
+                <RotateTransform Angle="50"/>
+            </Grid.RenderTransform>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="-350,250,-255,-250">
+                <StackPanel>
+                    <Border Width="700"
+                            Height="35"
+                            Background="#514162"
+                            Margin="150,0,0,0"
+                            CornerRadius="20"/>
+                    <Border Width="700"
+                            Height="35"
+                            Background="#6f5a87"
+                            Margin="0,15,0,0"
+                            CornerRadius="20"/>
+                    <Border Width="700"
+                            Height="35"
+                            Background="#32293D"
+                            Margin="75,15,0,0"
+                            CornerRadius="20"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <Border Width="700"
+                            Height="35"
+                            Background="#514162"
+                            Margin="150,0,0,0"
+                            CornerRadius="20"/>
+                    <Border Width="700"
+                            Height="35"
+                            Background="#6f5a87"
+                            Margin="0,15,0,0"
+                            CornerRadius="20"/>
+                    <Border Width="700"
+                            Height="35"
+                            Background="#32293D"
+                            Margin="75,15,0,0"
+                            CornerRadius="20"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Dragon BG-->
+        <Grid Grid.Row="1"
+            Grid.ColumnSpan="2"
+              Width="400"
+              VerticalAlignment="Bottom"
+              HorizontalAlignment="Right"
+              Margin="0,0,10,10"
+              Panel.ZIndex="-2"
+              Opacity="0.2">
+            <StackPanel>
+                <Image Source="Images/BrutalGreenDragon.png"
+                       RenderOptions.BitmapScalingMode="Fant" 
+                       VerticalAlignment="Bottom" 
+                       HorizontalAlignment="Center"
+                       />
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+        
+        <!--#endregion-->
+
+    </Grid>
+</Window>
