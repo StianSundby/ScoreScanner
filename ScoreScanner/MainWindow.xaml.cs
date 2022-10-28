@@ -23,11 +23,6 @@ namespace ScoreScanner
             Init();
             AppConsole.Text += "Loading...\n";
         }
-
-        // 2305    442   220    240
-        //TODO: Async ChangeCellValue?
-
-
         private void Init()
         {
             AppConsole.Text += "Initializing Score Scanner...\nReading settings...\n";
@@ -39,8 +34,6 @@ namespace ScoreScanner
             RectHeightInput.Text = settings.RectHeight == 0 ? null : settings.RectHeight.ToString();
             RectWidthInput.Text = settings.RectWidth == 0 ? null : settings.RectWidth.ToString();
             AppConsole.Text += "Finished reading settings.\n";
-
-
         }
 
         private async void Start(object sender, RoutedEventArgs e)
