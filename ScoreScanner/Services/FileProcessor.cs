@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace ScoreScanner.Services
 {
@@ -73,7 +74,10 @@ namespace ScoreScanner.Services
             return nextCell;
         }
         
-
+        public static async void ChangeCellValueAsync(string filePath, string cell, int value)
+        {
+            await Task.Run(() => ChangeCellValue(filePath, cell, value));
+        }
         public static void ChangeCellValue(string filePath, string cell, int value)
         {
             WorkBook wb = WorkBook.Load(filePath);

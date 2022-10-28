@@ -8,6 +8,7 @@ using static ScoreScanner.Services.FileProcessor;
 using static ScoreScanner.Services.ImageProcessor;
 using System.Drawing;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace ScoreScanner
 {
@@ -24,10 +25,6 @@ namespace ScoreScanner
         }
 
         // 2305    442   220    240
-        //C:\Users\Stian\.runelite\screenshots\Baktus Bror\Boss Kills
-
-        //TODO: Hvis den ikke finner size så er det en solo
-        //TODO: Hør med christian ang. filnavn
         //TODO: Async ChangeCellValue?
 
 
@@ -46,7 +43,7 @@ namespace ScoreScanner
 
         }
 
-        private void Start(object sender, RoutedEventArgs e)
+        private async void Start(object sender, RoutedEventArgs e)
         {
             if (!CheckInputFields()) return;
             CheckAppSettings();
@@ -66,8 +63,8 @@ namespace ScoreScanner
                         int.Parse(RectHeightInput.Text), int.Parse(RectWidthInput.Text));
                     var values = ShrinkScanResult(scanResult);
 
-                    ChangeCellValue(ExcelSheetInput.Text, new string("B" + (i + 1)), values[0]);
-                    ChangeCellValue(ExcelSheetInput.Text, new string("E" + (i + 1)), values[1]);
+                    await Task.Run(() => ChangeCellValueAsync(ExcelSheetInput.Text, new string("B" + (i + 1)), values[0]));
+                    await Task.Run(() => ChangeCellValueAsync(ExcelSheetInput.Text, new string("E" + (i + 1)), values[1]));
                 }
             }
         }
