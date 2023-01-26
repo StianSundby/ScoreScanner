@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ScoreScanner</id>
+    <version>1.0.0</version>
+    <authors>ScoreScanner</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0">
+        <dependency id="IronOcr" version="2022.10.9390" exclude="Build,Analyzers" />
+        <dependency id="IronXL.Excel" version="2022.9.9454" exclude="Build,Analyzers" />
+        <dependency id="System.Configuration.ConfigurationManager" version="6.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net6.0-windows7.0/Images/HelpIcon.png" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="D:\Repos\ScoreScanner\ScoreScanner\bin\Debug\net6.0-windows\ScoreScanner.runtimeconfig.json" target="lib\net6.0-windows7.0\ScoreScanner.runtimeconfig.json" />
+    <file src="D:\Repos\ScoreScanner\ScoreScanner\bin\Debug\net6.0-windows\ScoreScanner.dll" target="lib\net6.0-windows7.0\ScoreScanner.dll" />
+    <file src="D:\Repos\ScoreScanner\ScoreScanner\Images\HelpIcon.png" target="content\Images\HelpIcon.png" />
+    <file src="D:\Repos\ScoreScanner\ScoreScanner\Images\HelpIcon.png" target="contentFiles\any\net6.0-windows7.0\Images\HelpIcon.png" />
+  </files>
+</package>
