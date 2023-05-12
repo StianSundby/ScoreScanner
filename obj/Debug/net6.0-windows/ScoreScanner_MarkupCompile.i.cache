@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Repos\ScoreScanner\ScoreScanner\obj\Debug\net6.0-windows\
+D:\Repos\ScoreScanner\obj\Debug\net6.0-windows\
 ScoreScanner
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\Repos\ScoreScanner\ScoreScanner\App.xaml
+D:\Repos\ScoreScanner\App.xaml
 11407045341
 1-1570438072
 8-1436951198
-2031431467775
+203-49818433
 MainWindow.xaml;
 
 False

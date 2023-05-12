@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XyNvf/LlbIfpCxVNJGT7Jo6rpc29sev8/rrxJVlhDBGNs3yK/qASW8vGu3dSXu6WCeu04LCsWF7QHkvDeCmibg==",
+  "dgSpecHash": "HQU55wmLbnX+2JEflXJ3tsRG95DRKKZ1zBPvi1KJhqnjn55hTFfIa+Hw6Z0/peq9mpKuCAWE8F12ZCFw7liTZg==",
   "success": true,
-  "projectFilePath": "D:\\Repos\\ScoreScanner\\ScoreScanner\\ScoreScanner.csproj",
+  "projectFilePath": "D:\\Repos\\ScoreScanner\\ScoreScanner.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stian\\.nuget\\packages\\ironocr\\2022.10.9390\\ironocr.2022.10.9390.nupkg.sha512",
     "C:\\Users\\Stian\\.nuget\\packages\\ironsoftware.system.drawing\\2022.9.8843\\ironsoftware.system.drawing.2022.9.8843.nupkg.sha512",
